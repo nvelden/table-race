@@ -1,0 +1,20 @@
+body {
+}
+
+.head{
+  color: red;
+  padding: 3px;
+  margin: 2px;
+}
+
+.cell{
+  padding: 3px;
+  margin: 2px;
+}
+.bar{
+  background: none;
+  color: black;
+  padding: 3px;
+  margin: 2px;
+  width: 10px;
+}
