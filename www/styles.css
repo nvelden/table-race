@@ -1,20 +1,67 @@
 body {
 }
 
+
+/* Page lay-out*/
+.container-fluid{
+  width: 80%;
+}
+
+/* Inputs*/
+.selectize-control .selectize-input {
+  max-height: 35px;
+  overflow-y: auto;
+}
+
+.slider-animate-container{
+  font-size: 28px;
+  opacity: 1;
+  text-align: left;
+  margin-top: -50px;
+  margin-left: -40px;
+}
+
+.slider-animate-button{
+  opacity: 1;
+}
+
+#submitCountry:hover{
+  background-color: #77c477;
+}
+
+.play{
+  color: #5cb85c;
+}
+.play:hover{
+  color: #77c477;
+}
+
+
+a{
+  color: #5cb85c;
+}
+
+/* Table lay-out*/
+
 .head{
   color: red;
   padding: 3px;
   margin: 2px;
+  border: 1px solid;
 }
 
 .cell{
   padding: 3px;
   margin: 2px;
+  border: 1px solid;
 }
+
+
 .bar{
-  background: none;
-  color: black;
   padding: 3px;
   margin: 2px;
+  background-clip: content-box;
   width: 10px;
+  text-align: right;
+  border: 1px solid;
 }

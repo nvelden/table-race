@@ -16,15 +16,15 @@ const table = div.append('div')
 .attr('id', 'divTable')
 .style('display', 'flex')
 .style('flex-direction', 'column')
+.style('align-items', 'stretch')
 .style('justify-content', 'space-between');
 
 const columnContainer = table.append('div')
 .attr('id', 'head')
 .style('display', 'flex');
-
 const columns = columnContainer
 .selectAll('div')
-.data(options.colNames)
+.data(tableNames)
 .enter()
 .append('div')
 .attr('id', d => `column-${d}`)
@@ -115,14 +115,14 @@ function enterBar(enter, t, data, width = 300, offset = 10){
   const countryColor = d3.scaleOrdinal()
   .domain(uniqCountries)
   .range(d3.schemeSet1);
-
-
   enter
     .append("div")
     .attr('class', 'bar')
     .text(d => d.deaths_mil)
     .style('min-width', 'max-content')
-    .style('background', d =>`${countryColor(d.country)}`)
+    .style('background', d =>`rgba(0,0,0,0)
+    linear-gradient(90deg, transparent 0%, ${countryColor(d.country)} 0%)
+    no-repeat scroll left center / 100% 70%`)
      .call(text => text
      .transition(t)
      .style('width', d => `${(d.deaths_mil / max) * (width - offset)}px`))

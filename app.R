@@ -19,19 +19,23 @@ source("functions.R", local = TRUE)
                  tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
                  ),
      # Application title
-     titlePanel("COVID-19 TableRace"),
- 
-     # Sidebar with a slider input for number of bins 
-     sidebarLayout(
-         sidebarPanel(
-                 selectizeInput("countrySelection", "Country", choices = c(countryNames$country), 
-                                selected = c("United States", "China", 
-                                             "Germany", "Iran", "Netherlands", 
-                                             "France", "Italy", "United Kingdom", 
-                                             "Switzerland"), multiple = TRUE, 
-                                options = list(maxItems = 20))
-         ),
- 
+     fluidRow(width=12, id="headerContainer", style="display: flex;",
+              div(id="titleIcon", style="padding-top: 10px; padding-right: 10px; margin-bottom: 50px;",
+                  icon("fas fa-virus", "fa-4x")),
+              div(id="title",
+                  h2("Covid-19 Table Race", style="margin-bottom: 0px;"),
+                  h6("Last Updated:", style="margin-top: 0px; font-style: italic;")),
+              ),
+     fluidRow(width=12, id="inputContainer", style="display: flex; padding: 19px; background-color: #4e5d6c",
+                  div(id="countryInputContainer", style="width: 100%;",
+                      selectizeInput("countrySelection", "Country", choices = c(countryNames$country), width="100%",
+                                     selected = c("United States", "China", 
+                                                  "Germany", "Iran", "Netherlands", 
+                                                  "France", "Italy", "United Kingdom", 
+                                                  "Switzerland"), multiple = TRUE, 
+                                     options = list(maxItems = 20)),
+                      actionButton("submitCountry", "Submit", class = "btn-success"))
+              ),
          # Show a plot of the generated distribution
          mainPanel(
                 uiOutput("dateRange"),
@@ -39,7 +43,7 @@ source("functions.R", local = TRUE)
              d3Output("table")
          )
      )
- )
+ 
  
  # Define server logic required to draw a histogram
  server <- function(input, output) {
