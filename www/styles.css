@@ -6,11 +6,38 @@ body {
 .container-fluid{
   width: 80%;
 }
+.shiny-input-container:not(.shiny-input-container-inline){
+  width: 100%;
+}
+
 
 /* Inputs*/
+.inputContainer{
+  display: flex;
+  padding: 19px;
+  background-color: #4e5d6c;
+  margin: 20px;
+}
+
 .selectize-control .selectize-input {
   max-height: 35px;
   overflow-y: auto;
+}
+
+.irs-grid-pol{
+  opacity: 1 !important;
+}
+
+.irs-grid-text{
+  color: #fff !important;
+}
+
+.irs-min{
+  color: #fff !important;
+}
+
+.irs-max{
+  color: #fff !important;
 }
 
 .slider-animate-container{
@@ -42,25 +69,28 @@ a{
 }
 
 /* Table lay-out*/
-
 .head{
-  color: red;
+  color: green;
   padding: 3px;
   margin: 2px;
   border: 1px solid;
+}
+.column{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .cell{
   padding: 3px;
   margin: 2px;
   border: 1px solid;
+  white-space: nowrap;
 }
-
 
 .bar{
   padding: 3px;
   margin: 2px;
-  background-clip: content-box;
   width: 10px;
   text-align: right;
   border: 1px solid;

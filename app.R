@@ -19,14 +19,14 @@ source("functions.R", local = TRUE)
                  tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
                  ),
      # Application title
-     fluidRow(width=12, id="headerContainer", style="display: flex;",
-              div(id="titleIcon", style="padding-top: 10px; padding-right: 10px; margin-bottom: 50px;",
-                  icon("fas fa-virus", "fa-4x")),
+     fluidRow(width=12, id="headerContainer", style="display: flex; margin: 0; padding-left: 19px; padding-right: 19px;",
+              div(id="titleIcon", style="padding-top: 10px; padding-right: 10px; margin-bottom: 20px;",
+                  icon("fas fa-virus", "fa-6x")),
               div(id="title",
-                  h2("Covid-19 Table Race", style="margin-bottom: 0px;"),
-                  h6("Last Updated:", style="margin-top: 0px; font-style: italic;")),
+                  "Covid-19 Table Race", style="margin-bottom: 0px; font-size: 48px;",
+                  h4("Last Updated:", style="margin-top: 0px; font-style: italic;")),
               ),
-     fluidRow(width=12, id="inputContainer", style="display: flex; padding: 19px; background-color: #4e5d6c",
+     fluidRow(width=12, class="inputContainer",
                   div(id="countryInputContainer", style="width: 100%;",
                       selectizeInput("countrySelection", "Country", choices = c(countryNames$country), width="100%",
                                      selected = c("United States", "China", 
@@ -36,12 +36,17 @@ source("functions.R", local = TRUE)
                                      options = list(maxItems = 20)),
                       actionButton("submitCountry", "Submit", class = "btn-success"))
               ),
-         # Show a plot of the generated distribution
-         mainPanel(
-                uiOutput("dateRange"),
-        
-             d3Output("table")
-         )
+     fluidRow(width=12, class="inputContainer",
+              div(id="dateRange", style="width: 80%; margin-left: 40px;",
+              uiOutput("dateRange"),     
+              )
+             
+     ),
+     fluidRow(width=12, class="inputContainer",
+              div(id="tableOutput", style="width: 100%;",
+                  d3Output("table"),     
+              ))
+     
      )
  
  
@@ -56,7 +61,7 @@ source("functions.R", local = TRUE)
  
      output$dateRange <- renderUI({
          sliderInput("dateSlider", 
-                     label = NULL, 
+                     label = NULL,
                      min=as.Date(dataInput()$date[1]), 
                      max=as.Date(dataInput()$date[nrow(dataInput())]),
                      value=as.Date(dataInput()$date[1]),

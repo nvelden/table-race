@@ -58,4 +58,5 @@ data$date[nrow(data)]
 covidDates <- covidData(c("Switserland", "Belgium", "Netherlands", "USA", "Denmark", "UK")) %>% 
   select(., date) %>% unique()
 
-
+all <- covid19()
+all
