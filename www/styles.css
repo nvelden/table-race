@@ -16,7 +16,7 @@ body {
   display: flex;
   padding: 19px;
   background-color: #4e5d6c;
-  margin: 20px;
+  margin: 10px;
 }
 
 .selectize-control .selectize-input {
@@ -63,35 +63,68 @@ body {
   color: #77c477;
 }
 
+#GitHub, #LinkedIN{
+  color: #ebebeb;
+}
 
 a{
   color: #5cb85c;
 }
 
 /* Table lay-out*/
-.head{
-  color: green;
-  padding: 3px;
-  margin: 2px;
-  border: 1px solid;
+#table{
+  height: 100% !important;
+  background-color: red;
 }
+
+#divTable{
+ border-left: 1px solid black;
+ border-right: 1px solid black;
+ border-top: 1px solid black;
+}
+
+#cellCont-iso_alpha_2{
+text-align: center;
+}
+
+.head{
+  background-color: #2b3e50;
+  padding: 5px;
+  border-bottom: 0.5px solid black;
+  color: #ebebeb;
+}
+
 .column{
+  background-color: rgb(235, 235, 235);
+}
+
+.cellContainer{
+  padding: 0;
+  margin: 0;
+}
+
+.column-text{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  white-space: nowrap;
+}
+
+.column-bar{
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  white-space: nowrap;
 }
 
 .cell{
   padding: 3px;
-  margin: 2px;
-  border: 1px solid;
+  border-bottom: 0.5px solid;
   white-space: nowrap;
 }
 
 .bar{
   padding: 3px;
-  margin: 2px;
-  width: 10px;
-  text-align: right;
-  border: 1px solid;
+  text-align: left;
+  border-bottom: 0.5px solid;
 }
