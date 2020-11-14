@@ -23,7 +23,7 @@ source("functions.R", local = TRUE)
      # Application title
      fluidRow(width=12, id="headerContainer", style="display: flex; margin: 0; padding-left: 19px; padding-right: 19px;",
               div(id="titleIcon", style="padding-top: 10px; padding-right: 10px; margin-bottom: 20px;",
-                  icon("fas fa-virus", "fa-6x")),
+                  icon("virus", "fa-6x"), lib="font-awesome"),
               div(id="titleContainer",
               div(id="title",
                   "Covid-19 Table Race", style="margin-bottom: 0px; font-size: 48px;"),
@@ -79,7 +79,7 @@ source("functions.R", local = TRUE)
                      min=as.Date(dataInput()$date[1]), 
                      max=as.Date(dataInput()$date[nrow(dataInput())]),
                      value=as.Date(dataInput()$date[1]),
-                     animate = animationOptions(interval = 100, loop = FALSE),
+                     animate = animationOptions(interval = 150, loop = FALSE),
                      timeFormat="%b %Y"
          )
      })
