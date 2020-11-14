@@ -36,9 +36,9 @@ source("functions.R", local = TRUE)
                       selectizeInput("countrySelection", "Country", choices = c(countryNames$country), width="100%",
                                      selected = c("United States", "China", 
                                                   "Germany", "Iran", "Netherlands", 
-                                                  "France", "Italy", "United Kingdom", 
+                                                  "France", "Italy", "Spain", "United Kingdom", 
                                                   "Switzerland"), multiple = TRUE, 
-                                     options = list(maxItems = 20)),
+                                     options = list(maxItems = 30)),
                       selectInput("SortSelection", "Sort by", choices = c("Deaths" = "deaths", 
                                                                           "Deaths [7 day]" = "deaths_new_07da", 
                                                                           "Confirmed" = "confirmed", 
@@ -49,17 +49,19 @@ source("functions.R", local = TRUE)
                                   ),
                       actionButton("submit", "Submit", class = "btn-success"))
               ),
-     fluidRow(width=12, class="inputContainer",
-              div(id="dateRange", style="width: 80%; margin-left: 40px;",
-              uiOutput("dateRange"),     
-              )
+     fluidRow(width=12, class="inputContainer", style="justify-content: space-between;",
+              div(id="dateRange", style="flex-grow: 1; margin-left: 40px;",
+              uiOutput("dateRange")),
+              uiOutput("dayOutput")
              
      ),
      fluidRow(width=12, class="inputContainer", style="display: flex; flex-direction: column;",
-              div(id="citation", 'Source: Guidotti E, Ardia D (2020). COVID-19 Data Hub.', style="color: #ebebeb;"),
               div(id="tableOutput", style="width: 100%;",
                   d3Output("table"),
-              ))
+              ),
+              div(id="citation", 'Source: Guidotti E, Ardia D (2020). COVID-19 Data Hub.', style="color: #ebebeb; font-size: 12px;"),
+              div(id="citation", '7 day: Rolling 7-day average.', style="color: #ebebeb; font-size: 12px;")
+              )
      )
  
  server <- function(input, output) {
@@ -81,7 +83,12 @@ source("functions.R", local = TRUE)
                      timeFormat="%b %Y"
          )
      })
- 
+     
+     output$dayOutput <- renderUI({
+         div(id="dayOutput", style="text-align: center; padding-left: 25px;", h3(format(input$dateSlider, "%d %b"))
+         )    
+     })
+     
      output$table <- renderD3({
          
          if(is.null(dataInput()))
@@ -90,7 +97,7 @@ source("functions.R", local = TRUE)
              data = dataInput(),
              options = list(
                      selColumns = c("rank", "iso_alpha_2", "country", "population", "confirmed", "confirmed_new_07da", "deaths", "deaths_new_07da", "tests", "tests_new_07da"),
-                     colNames = c("Rank", "Flag", "Country", "Population [M]", "Confirmed [Total]", "Confirmed [7 Day]", "Deaths [Total]", "Deaths [7 day]", "Tests [Total]", "Tests [7 day]"),
+                     colNames = c("#", "Flag", "Country", "Population", "Confirmed", "Confirmed [7 Day]", "Deaths", "Deaths [7 day]", "Tests", "Tests [7 day]"),
                      colType = c("text", "text", "text", "text", "bar", "bar", "bar", "bar", "bar"),
                      dateInput = input$dateSlider,
                      sortSel = input$SortSelection

@@ -19,21 +19,13 @@ countryNames <- data.frame(
   stringsAsFactors = FALSE
 ) %>% unique() 
 
-
 covidData <- function(selection, rank){
   covidData <- covid19(selection, raw=FALSE, cache = TRUE)
   #Match Country names by ID
   covidData <- left_join(covidData, countryNames) %>% select(., iso_alpha_2, country, date, tests, confirmed, recovered, deaths, population)
   #fill missing values
   covidData <- covidData %>% group_by(country) %>% fill(c(tests, confirmed, recovered, deaths, population))
-  #population, recovered cases and deaths per million
-  covidData <- covidData %>% mutate(population = round((population / 1000000),1))
-  # covidData <- covidData %>% mutate(tests_mil = round((tests / population)),
-  #                                   deaths_mil = round((deaths / population)),
-  #                                   confirmed_mil = round((confirmed / population)),
-  #                                   recovered_mil = round((recovered / population))
-  #                                   )
-  #new cases, tests, confirmed and deaths per million
+  
   covidData <- covidData %>% group_by(country) %>% mutate(
     tests_new = tests - lag(tests, default = 0),
     confirmed_new = confirmed - lag(confirmed, default = 0),

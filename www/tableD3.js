@@ -62,12 +62,11 @@ const uniqCountries = countriesData
 .filter(function(elem, pos) {
   return countriesData.indexOf(elem) == pos;
 });
-
 //Colunns
 rank = textColumn(dataSel, "rank", "rank", t);
 country = textColumn(dataSel, "country", "country", t);
 flag = textColumn(dataSel, "iso_alpha_2", "iso_alpha_2", t);
-population = textColumn(dataSel, "population", "population", t);
+population = numericColumn(dataSel, "population", "population", t);
 
 deaths = barColumn(data, dataSel, "deaths", "rank", "country", t);
 confirmed = barColumn(data, dataSel, "confirmed", "rank", "country", t);
@@ -135,6 +134,30 @@ div.select(`#cellCont-${text}`)
     enter => enter
   .append("div")
   .html(d => d[text])
+  .style('opacity', 0)
+  .call(text => text
+      .transition(t)
+      .style('opacity', 1)
+   ),
+   update => update
+  .transition(t)
+  .style('opacity', 1),
+    exit => exit
+  .remove()
+  )
+  .attr('class', 'cell')
+
+}
+
+function numericColumn(data, num, order, t){
+
+div.select(`#cellCont-${num}`)
+  .selectAll('div')
+  .data(data, d => d[order])
+  .join(
+    enter => enter
+  .append("div")
+  .html(d => numFormat(d[num]))
   .style('opacity', 0)
   .call(text => text
       .transition(t)
